@@ -5,6 +5,11 @@ async function getPoke() {
   let pokemonImg = document.getElementById("pokemonImg");
   let baseXp = document.getElementById("baseXp");
   let height = document.getElementById("height");
+
+  let first = search.charAt(0).toLowerCase();
+  let rest = search.slice(1);
+  search = first + rest;
+
   let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${search}`, {
     method: "GET",
     headers: {
@@ -16,10 +21,10 @@ async function getPoke() {
   let data = await pokemon.json();
   console.log(data);
 
-  let firstLetter = search.slice(0, 1).toUpperCase();
-  let restLetters = search.slice(2);
-
+  let firstLetter = search.charAt(0).toUpperCase();
+  let restLetters = search.slice(1);
   search = firstLetter + restLetters;
+
   abilities.textContent = "";
   data.abilities.forEach((abilityObj) => {
     let abilityName = abilityObj.ability.name;
